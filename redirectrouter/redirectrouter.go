@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"net/http"
 	"strings"
 
@@ -13,7 +14,13 @@ import (
 )
 
 func main() {
+	routeNum := 1000
+	depth := 10
+	routes := genRoutes(routeNum, depth)
+	router := httprouter.New()
+	loadRoutes(router, routes)
 
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
 func redirect(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -27,8 +34,8 @@ func genRoutes(numRoutes int, depth int) bytes.Buffer {
 	return buf
 }
 
-func loadRoutes(routes bytes.Buffer) {
-	router := httprouter.New()
+func loadRoutes(router *httprouter.Router, routes bytes.Buffer) {
+
 	scanner := bufio.NewScanner(strings.NewReader(routes.String()))
 	for scanner.Scan() {
 		router.GET(scanner.Text(), redirect)
