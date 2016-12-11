@@ -5,7 +5,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/laver/routes"
+	"github.com/laver/gotests/routes"
 )
 
 func check(e error) {

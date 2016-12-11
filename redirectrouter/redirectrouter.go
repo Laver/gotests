@@ -9,7 +9,7 @@ import (
 	"bytes"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/laver/routes"
+	"github.com/laver/gotests/routes"
 )
 
 func main() {
